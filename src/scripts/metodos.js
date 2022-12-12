@@ -6,80 +6,110 @@ const employeeBonus = [12, 14, 78, 90, 100, 35, 14, 21]
 // Exercício 1
 // Método .maps() - const currentEmployeeBonus = employeeBonus.map(element => { return element * 2 })
 
-const currentEmployeeBonus = arr => {
+const callbackMap = element => {
+    return element * 2
+}
+
+const currentEmployeeBonus = (arr, cb) => {
     let obj = []
     for (let i = 0; i < arr.length; i++) {
-        const currentBonus = arr[i] * 2
-        obj.push(currentBonus)
+        obj.push(cb(arr[i], i, arr))
     }
-    return console.log(obj)
+    return obj
 }
-currentEmployeeBonus(employeeBonus)
+currentEmployeeBonus(employeeBonus, callbackMap)
+console.log(currentEmployeeBonus(employeeBonus, callbackMap))
 
 
 // Exercício 2 
 // Método .filter() - const valuesGreaterThanThirty = employeeBonus.filter(element => {return element > 30})
 
-const valuesGreaterThanThirty = (arr, element) => {
+const callbackFilter = element => {
+    return element > 30
+}
+
+const valuesGreaterThanThirty = (arr, cb) => {
     let obj = []
     for (let i = 0; i < arr.length; i++) {
-        const graterValues = arr[i]
-        if (graterValues > element) obj.push(graterValues)
+        if (cb(arr[i], i, arr) === true) {
+            obj.push(arr[i])
+        }
     }
-    return console.log(obj)
+    return obj
 }
-valuesGreaterThanThirty(employeeBonus, 30)
-
+valuesGreaterThanThirty(employeeBonus, callbackFilter)
+console.log(valuesGreaterThanThirty(employeeBonus, callbackFilter))
 
 // Exercício 3
 // Método .reduce() - const bonusSum = employeeBonus.reduce((previousValue, currentValue) => { return currentValue + previousValue })
 
-const bonusSum = arr => {
-    let sum = 0
-    for (let i = 0; i < arr.length; i++) {
-        sum += arr[i]
-    }
-    return console.log(sum)
+const callbackReduce = (acc, cur) => {
+    return acc + cur
 }
-bonusSum(employeeBonus)
 
+const bonusSum = (arr, cb) => {
+    let value = 0
+    for (let i = 0; i < arr.length; i++) {
+        value = cb(value, arr[i], i, arr)
+    }
+    return value
+}
+bonusSum(employeeBonus, callbackReduce)
+console.log(bonusSum(employeeBonus, callbackReduce))
 
 // Exercício 4
 // Método .find() - const found = employeeBonus.find(element => element > 30) 
 
-const found = (arr, e) => {
+const callbackFind = element => {
+    return element > 30
+}
+
+const found = (arr, cb) => {
     for (let i = 0; i < arr.length; i++) {
-        const foundValue = arr[i]
-        if (foundValue > e) return console.log(foundValue)
+        if (cb(arr[i], i, arr) === true) {
+            return arr[i]
+        }
     }
 }
-found(employeeBonus, 30)
+found(employeeBonus, callbackFind)
+console.log(found(employeeBonus, callbackFind))
 
 
 // Exercício 5
 // Método .includes() - const trueOrFalse = employeeBonus.includes(12)
 
-const trueOrFalse = (arr, e) => {
+const trueOrFalse = (arr, value) => {
     for (let i = 0; i < arr.length; i++) {
-        if (arr[i] === e) return console.log(true)
+        if (arr[i] === value) {
+            return true
+        }
     }
-    return console.log(false)
+    return false
 }
 trueOrFalse(employeeBonus, 12)
+console.log(trueOrFalse(employeeBonus, 12))
 
 
 // Exercício 6
 // Método .indexOf() - const findPosition = employeeBonus.indexOf(78)
 
-const findPosition = arr => {
-    let obj = {}
-    for (let i = 0; i < arr.length; i++) {
-        const position = arr[i]
-        obj[i] = position
+const callbackIndexOf = (element, current) => {
+    if (element === current) {
+        return true
+    } else {
+        return false
     }
-    console.log(obj)
 }
-findPosition(employeeBonus)
+
+const findPosition = (element, arr, cb) => {
+    for (let i = 0; i < arr.length; i++) {
+        if (cb(element, arr[i])) {
+            return console.log(i)
+        }
+    }
+    return console.log(-1)
+}
+findPosition(145, employeeBonus, callbackIndexOf)
 
 
 // Array inalterado 
