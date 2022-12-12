@@ -104,13 +104,13 @@ const callbackIndexOf = (element, current) => {
 const findPosition = (element, arr, cb) => {
     for (let i = 0; i < arr.length; i++) {
         if (cb(element, arr[i])) {
-            return console.log(i)
+            return i
         }
     }
-    return console.log(-1)
+    return -1
 }
 findPosition(145, employeeBonus, callbackIndexOf)
-
+console.log(findPosition(145, employeeBonus, callbackIndexOf))
 
 // Array inalterado 
 
