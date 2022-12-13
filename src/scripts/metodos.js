@@ -78,8 +78,8 @@ console.log(found(employeeBonus, callbackFind))
 // Exercício 5
 // Método .includes() - const trueOrFalse = employeeBonus.includes(12)
 
-const trueOrFalse = (arr, value) => {
-    for (let i = 0; i < arr.length; i++) {
+const trueOrFalse = (arr, value, fromIndex = 0) => {
+    for (let i = fromIndex; i < arr.length; i++) {
         if (arr[i] === value) {
             return true
         }
@@ -88,6 +88,7 @@ const trueOrFalse = (arr, value) => {
 }
 trueOrFalse(employeeBonus, 12)
 console.log(trueOrFalse(employeeBonus, 12))
+console.log(trueOrFalse(employeeBonus, 78, 2))
 
 
 // Exercício 6
